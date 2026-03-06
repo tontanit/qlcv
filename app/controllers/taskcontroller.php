@@ -41,8 +41,20 @@ class TaskController
                 'han'    => $_POST['han_hoan_thanh'],
                 'user_id' => $_POST['nguoi_thuc_hien_id']
             ]);
-
-            header('Location: list.php?success=1');
+            header('Location: index.php?url=task/index&success=1');
+            exit; // Luôn có exit sau header
+            //Thay vì gõ: http://localhost/qlcv/public/list.php?success=1
+            //Hãy gõ: http://localhost/qlcv/public/index.php?url=task/index&success=1
         }
+    }
+    // Bổ sung phương thức này vào class TaskController
+    public function create()
+    {
+        // Lấy danh sách users để hiển thị trong form (thường là select box)
+        $stmt = $this->db->query("SELECT id, ho_ten FROM users");
+        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        // Gọi view add.php (đảm bảo file này tồn tại trong app/Views/)
+        require_once "../app/Views/add.php";
     }
 }
