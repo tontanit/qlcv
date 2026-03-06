@@ -1,0 +1,17 @@
+RewriteEngine On
+# Nếu file hoặc thư mục tồn tại thì cho qua
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Nếu không, đẩy mọi request về index.php
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Nếu dự án nằm trong folder 'qlcv', cần thêm RewriteBase /qlcv/
+    # Nếu nằm trực tiếp tại localhost/, thì dùng RewriteBase /
+    RewriteBase /qlcv/
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+</IfModule>
